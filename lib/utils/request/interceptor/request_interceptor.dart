@@ -10,4 +10,17 @@ class RequestInterceptor extends Interceptor {
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     return super.onRequest(options, handler);
   }
+
+  // 添加认证
+  // 读取本地配置
+  Map<String, dynamic>? getAuthorizationHeader() {
+    Map<String, dynamic>? headers;
+    // 从getx或者sputils中获取
+    // String accessToken = Global.accessToken;
+    String accessToken = "";
+    headers = {
+      'Authorization': 'Bearer $accessToken',
+    };
+    return headers;
+  }
 }

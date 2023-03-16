@@ -50,41 +50,12 @@ class AxiosEntity {
     }
   }
 
-
-  // 添加认证
-  // 读取本地配置
-  Map<String, dynamic>? getAuthorizationHeader() {
-    Map<String, dynamic>? headers;
-    // 从getx或者sputils中获取
-    // String accessToken = Global.accessToken;
-    String accessToken = "";
-    headers = {
-      'Authorization': 'Bearer $accessToken',
-    };
-    return headers;
-  }
-
   Future get(
       String path, {
         Map<String, dynamic>? params,
         Options? options,
-        CancelToken? cancelToken,
-        bool refresh = false,
-        String? cacheKey,
-        bool cacheDisk = false,
       }) async {
     Options requestOptions = options ?? Options();
-    requestOptions = requestOptions.copyWith(
-      extra: {
-        "refresh": refresh,
-        "cacheKey": cacheKey,
-        "cacheDisk": cacheDisk,
-      },
-    );
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: authorization);
-    }
     Response response;
     response = await dio.get(
       path,
@@ -100,13 +71,8 @@ class AxiosEntity {
         Map<String, dynamic>? params,
         data,
         Options? options,
-        CancelToken? cancelToken,
       }) async {
     Options requestOptions = options ?? Options();
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: authorization);
-    }
     var response = await dio.post(
       path,
       data: data,
@@ -124,11 +90,6 @@ class AxiosEntity {
         CancelToken? cancelToken,
       }) async {
     Options requestOptions = options ?? Options();
-
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: authorization);
-    }
     var response = await dio.put(
       path,
       data: data,
@@ -146,10 +107,6 @@ class AxiosEntity {
         CancelToken? cancelToken,
       }) async {
     Options requestOptions = options ?? Options();
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: authorization);
-    }
     var response = await dio.patch(
       path,
       data: data,
@@ -167,11 +124,6 @@ class AxiosEntity {
         CancelToken? cancelToken,
       }) async {
     Options requestOptions = options ?? Options();
-
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions = requestOptions.copyWith(headers: authorization);
-    }
     var response = await dio.delete(
       path,
       data: data,
