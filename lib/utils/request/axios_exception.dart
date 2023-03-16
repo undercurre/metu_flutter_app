@@ -1,11 +1,11 @@
 /// 自定义异常类型
 import 'package:dio/dio.dart';
 
-class HttpException implements Exception {
+class AxiosException implements Exception {
   final String message;
   final int code;
 
-  HttpException(
+  AxiosException(
     this.code,
     this.message,
   );
@@ -15,7 +15,7 @@ class HttpException implements Exception {
     return "$code$message";
   }
 
-  factory HttpException.create(DioError error) {
+  factory AxiosException.create(DioError error) {
     switch (error.type) {
       case DioErrorType.cancel:
         {
@@ -76,27 +76,27 @@ class HttpException implements Exception {
                 }
               default:
                 {
-                  return HttpException(errCode!, error.response?.statusMessage ?? '未知错误');
+                  return AxiosException(errCode!, error.response?.statusMessage ?? '未知错误');
                 }
             }
           } on Exception catch (_) {
-            return HttpException(-1, "未知错误");
+            return AxiosException(-1, "未知错误");
           }
         }
       default:
         {
-          return HttpException(-1, error.message);
+          return AxiosException(-1, error.message);
         }
     }
   }
 }
 
 /// 请求错误
-class BadRequestException extends HttpException {
+class BadRequestException extends AxiosException {
   BadRequestException(int code, String message) : super(code, message);
 }
 
 /// 未认证异常
-class UnauthorisedException extends HttpException {
+class UnauthorisedException extends AxiosException {
   UnauthorisedException(int code, String message) : super(code, message);
 }
