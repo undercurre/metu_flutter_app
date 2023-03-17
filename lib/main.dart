@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:metu_app/utils/request/axios_entity.dart';
 import 'package:metu_app/views/login/login.dart';
 
 
 void main() {
+  AxiosEntity().init(
+    baseUrl: 'http://192.168.196.1:7000/swagger'
+  );
+
   runApp(const MyApp());
 }
 
