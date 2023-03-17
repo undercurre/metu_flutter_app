@@ -6,6 +6,7 @@ import 'interceptor/response_interceptor.dart';
 
 class AxiosEntity {
   static final AxiosEntity _instance = AxiosEntity._internal();
+
   // 单例模式使用Http类
   factory AxiosEntity() => _instance;
 
@@ -51,10 +52,10 @@ class AxiosEntity {
   }
 
   Future get(
-      String path, {
-        Map<String, dynamic>? params,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? params,
+    Options? options,
+  }) async {
     Options requestOptions = options ?? Options();
     Response response;
     response = await dio.get(
@@ -67,11 +68,11 @@ class AxiosEntity {
   }
 
   Future post(
-      String path, {
-        Map<String, dynamic>? params,
-        data,
-        Options? options,
-      }) async {
+    String path, {
+    Map<String, dynamic>? params,
+    data,
+    Options? options,
+  }) async {
     Options requestOptions = options ?? Options();
     var response = await dio.post(
       path,
@@ -83,12 +84,11 @@ class AxiosEntity {
   }
 
   Future put(
-      String path, {
-        data,
-        Map<String, dynamic>? params,
-        Options? options,
-        CancelToken? cancelToken,
-      }) async {
+    String path, {
+    data,
+    Map<String, dynamic>? params,
+    Options? options,
+  }) async {
     Options requestOptions = options ?? Options();
     var response = await dio.put(
       path,
@@ -100,12 +100,11 @@ class AxiosEntity {
   }
 
   Future patch(
-      String path, {
-        data,
-        Map<String, dynamic>? params,
-        Options? options,
-        CancelToken? cancelToken,
-      }) async {
+    String path, {
+    data,
+    Map<String, dynamic>? params,
+    Options? options,
+  }) async {
     Options requestOptions = options ?? Options();
     var response = await dio.patch(
       path,
@@ -117,12 +116,11 @@ class AxiosEntity {
   }
 
   Future delete(
-      String path, {
-        data,
-        Map<String, dynamic>? params,
-        Options? options,
-        CancelToken? cancelToken,
-      }) async {
+    String path, {
+    data,
+    Map<String, dynamic>? params,
+    Options? options,
+  }) async {
     Options requestOptions = options ?? Options();
     var response = await dio.delete(
       path,
