@@ -11,7 +11,7 @@ import 'config/index.dart';
 void main() async {
   AppConfig().init(
       flavor: BuildFlavor.dev,
-      baseUrl: 'http://localhost:7000/backend/',
+      baseUrl: 'http://127.0.0.1:7000/backend/',
       name: 'Metu测试版');
 
   AxiosEntity().init(baseUrl: AppConfig.apiBaseUrl);

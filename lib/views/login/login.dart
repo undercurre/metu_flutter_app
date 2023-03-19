@@ -1,6 +1,10 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:metu_app/api/user.dart';
+import 'package:metu_app/model/do/login_req.dart';
+import 'package:metu_app/utils/logger/index.dart';
 import 'package:metu_app/views/login/register.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,6 +16,9 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -66,6 +73,7 @@ class LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           TextFormField(
+                            controller: _usernameController,
                             decoration: const InputDecoration(
                               labelText: "账号",
                               hintText: '请输入账号',
@@ -78,6 +86,7 @@ class LoginPageState extends State<LoginPage> {
                             },
                           ),
                           TextFormField(
+                            controller: _passwordController,
                             decoration: const InputDecoration(
                               labelText: "密码",
                               hintText: '请输入密码',
@@ -113,13 +122,14 @@ class LoginPageState extends State<LoginPage> {
                               width: 200.0,
                               height: 50.0,
                               child: ElevatedButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   // Validate will return true if the form is valid, or false if
                                   // the form is invalid.
                                   if (_formKey.currentState!.validate()) {
-
+                                    LoginRequest loginRequestData = LoginRequest(_usernameController.text, _passwordController.text);
                                     // Process data.
-                                    // UserApi.login(loginRequestData)
+                                    var responce = await UserApi.login(loginRequestData);
+                                    Console.log(responce);
                                   }
                                 },
                                 child: const Text('登录'),
