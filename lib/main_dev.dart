@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:metu_app/router/index.dart';
 import 'package:metu_app/utils/request/axios_entity.dart';
-import 'package:metu_app/views/login/login.dart';
+import 'package:metu_app/views/home/index.dart';
 
+import 'config/index.dart';
 
 void main() {
-  AxiosEntity().init(
-    baseUrl: 'http://192.168.196.1:7000/swagger'
-  );
+  AppConfig().init(
+      flavor: BuildFlavor.dev,
+      baseUrl: 'http://localhost:7000/backend/',
+      name: 'Metu测试版');
+
+  AxiosEntity().init(baseUrl: AppConfig.apiBaseUrl);
 
   runApp(const MyApp());
 }
@@ -31,7 +36,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      routes: router,
+      home: const HomePage(),
     );
   }
 }

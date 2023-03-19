@@ -51,23 +51,23 @@ class AxiosEntity {
     }
   }
 
-  Future get(
+  static Future<K?> get<T, K>(
     String path, {
-    Map<String, dynamic>? params,
+    T? params,
     Options? options,
   }) async {
     Options requestOptions = options ?? Options();
-    Response response;
+    Response<K> response;
     response = await dio.get(
       path,
-      queryParameters: params,
+      queryParameters: params as Map<String, dynamic>,
       options: requestOptions,
     );
 
     return response.data;
   }
 
-  Future post(
+  static Future post(
     String path, {
     Map<String, dynamic>? params,
     data,
@@ -83,7 +83,7 @@ class AxiosEntity {
     return response.data;
   }
 
-  Future put(
+  static Future put(
     String path, {
     data,
     Map<String, dynamic>? params,
@@ -99,7 +99,7 @@ class AxiosEntity {
     return response.data;
   }
 
-  Future patch(
+  static Future patch(
     String path, {
     data,
     Map<String, dynamic>? params,
@@ -115,7 +115,7 @@ class AxiosEntity {
     return response.data;
   }
 
-  Future delete(
+  static Future delete(
     String path, {
     data,
     Map<String, dynamic>? params,
