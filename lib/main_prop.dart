@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:metu_app/router/index.dart';
+import 'package:metu_app/utils/logger/index.dart';
 import 'package:metu_app/utils/request/axios_entity.dart';
+import 'package:metu_app/utils/storage/index.dart';
 import 'package:metu_app/views/home/index.dart';
 
 import 'config/index.dart';
@@ -12,6 +14,10 @@ void main() {
       name: 'Metu');
 
   AxiosEntity().init(baseUrl: AppConfig.apiBaseUrl);
+
+  LocalStorage.init();
+
+  Console().init();
 
   runApp(const MyApp());
 }
@@ -36,7 +42,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      routes: router,
+      initialRoute: 'home',
+      onGenerateRoute: routeHook,
       home: const HomePage(),
     );
   }

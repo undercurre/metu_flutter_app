@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:metu_app/utils/logger/index.dart';
+import 'package:metu_app/utils/storage/index.dart';
 import 'package:metu_app/views/home/index.dart';
 import 'package:metu_app/views/login/login.dart';
 
@@ -9,10 +11,13 @@ Map<String, WidgetBuilder> router = {
 };
 
 //固定写法
-var onGenerateRoute = (RouteSettings settings) {
+var routeHook = (RouteSettings settings) {
+  Console.log('路由守卫');
   // 统一处理
   final name = settings.name;
-  final WidgetBuilder pageContentBuilder = router[name] ?? (content) => const HomePage();
+  WidgetBuilder pageContentBuilder = router[name] ?? (content) => const HomePage();
+  // 没有登陆信息就前往登陆页
+  if (!LocalStorage.containsKey('userInfo')) pageContentBuilder = (content) => const LoginPage();
   final Route route = MaterialPageRoute(builder: (context) => pageContentBuilder(context));
   return route;
 };

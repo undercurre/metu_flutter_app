@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:metu_app/api/user.dart';
 import 'package:metu_app/views/login/register.dart';
 
 class LoginPage extends StatefulWidget {
@@ -115,8 +117,9 @@ class LoginPageState extends State<LoginPage> {
                                   // Validate will return true if the form is valid, or false if
                                   // the form is invalid.
                                   if (_formKey.currentState!.validate()) {
-                                    // Process data.
 
+                                    // Process data.
+                                    // UserApi.login(loginRequestData)
                                   }
                                 },
                                 child: const Text('登录'),

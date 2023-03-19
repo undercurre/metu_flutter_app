@@ -48,7 +48,7 @@ class LocalStorage {
     }
   }
 
-  /// 根据key。读取数据，
+  /// 根据key读取数据，
   static Object? getItem<T>(String key) {
     var value = _sp.get(key);
     if (value is String) {
