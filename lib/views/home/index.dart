@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metu_app/config/index.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +24,7 @@ class HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar( //导航栏
-        title: Text(AppConfig.appName),
+        title: Text(dotenv.get('appName')),
       ),
       body: ListView.separated(
         itemCount: 100,

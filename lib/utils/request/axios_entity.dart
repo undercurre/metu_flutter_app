@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:metu_app/utils/logger/index.dart';
 
 import 'interceptor/error_interceptor.dart';
 import 'interceptor/request_interceptor.dart';
@@ -51,19 +55,19 @@ class AxiosEntity {
     }
   }
 
-  static Future<K?> get<T, K>(
+  static Future<K?> get<K>(
     String path, {
     Map<String, dynamic>? params,
     Options? options,
   }) async {
     Options requestOptions = options ?? Options();
     Response<K> response;
-    response = await dio.get(
+    response = await dio.get<K>(
       path,
       queryParameters: params,
       options: requestOptions,
     );
-
+    debugPrint('请求完成');
     return response.data;
   }
 

@@ -129,7 +129,7 @@ class LoginPageState extends State<LoginPage> {
                                     LoginRequest loginRequestData = LoginRequest(_usernameController.text, _passwordController.text);
                                     // Process data.
                                     var responce = await UserApi.login(loginRequestData);
-                                    Console.log(responce);
+                                    Console.log('完成请求');
                                   }
                                 },
                                 child: const Text('登录'),

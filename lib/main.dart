@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:logger/logger.dart';
 import 'package:metu_app/router/index.dart';
 import 'package:metu_app/utils/logger/index.dart';
 import 'package:metu_app/utils/request/axios_entity.dart';
 import 'package:metu_app/utils/storage/index.dart';
 import 'package:metu_app/views/home/index.dart';
 
-import 'config/index.dart';
-
-void main() {
-  AppConfig().init(
-      flavor: BuildFlavor.prop,
-      baseUrl: 'http://localhost:7000/',
-      name: 'Metu');
-
-  AxiosEntity().init(baseUrl: AppConfig.apiBaseUrl);
-
-  LocalStorage.init();
+void main() async {
 
   Console().init();
+
+  const env = String.fromEnvironment('env');
+  Console.log(env);
+  if (env != 'dev' && env != 'prod') {
+    // 如果不传dev或者prod默认使用sit环境
+    await dotenv.load(fileName: ".dev.env");
+  } else {
+    await dotenv.load(fileName: ".$env.env");
+  }
+
+  AxiosEntity().init(baseUrl: dotenv.get('baseUrl'));
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await LocalStorage.init();
 
   runApp(const MyApp());
 }
