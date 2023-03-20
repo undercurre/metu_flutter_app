@@ -6,6 +6,8 @@ import 'package:metu_app/api/user.dart';
 import 'package:metu_app/model/do/login_req.dart';
 import 'package:metu_app/model/do/login_res.dart';
 import 'package:metu_app/utils/logger/index.dart';
+import 'package:metu_app/utils/storage/index.dart';
+import 'package:metu_app/views/home/index.dart';
 import 'package:metu_app/views/login/register.dart';
 
 class LoginPage extends StatefulWidget {
@@ -130,6 +132,13 @@ class LoginPageState extends State<LoginPage> {
                                     LoginRequest loginRequestData = LoginRequest(_usernameController.text, _passwordController.text);
                                     // Process data.
                                     LoginResponse? responce = await UserApi.login(loginRequestData);
+
+                                    if (responce != null) {
+                                      // 缓存用户信息
+                                      LocalStorage.setItem('userInfo', responce.data.info);
+                                      LocalStorage.setItem('token', responce.data.token);
+                                      goToHome();
+                                    }
                                   }
                                 },
                                 child: const Text('登录'),
@@ -156,6 +165,18 @@ class LoginPageState extends State<LoginPage> {
             pageBuilder: (BuildContext context,Animation animation,
                 Animation secondaryAnimation){
               return const RegisterPage();
+            }
+        )
+    );
+  }
+
+  goToHome() {
+    Navigator.of(context).push(
+        PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 250), // //动画时间为0.25秒
+            pageBuilder: (BuildContext context,Animation animation,
+                Animation secondaryAnimation){
+              return const HomePage();
             }
         )
     );
