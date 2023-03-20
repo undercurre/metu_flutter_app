@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:metu_app/api/mission.dart';
+import 'package:metu_app/model/do/mission_list_req.dart';
+import 'package:metu_app/utils/storage/index.dart';
+import 'package:metu_app/utils/logger/index.dart';
+
+import '../../model/entity/mission.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,11 +15,17 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  List<Mission> missionList = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    var userInfo = LocalStorage.getItem('userInfo');
+    Console.log('获取userInfo');
+    Console.log(userInfo);
+    // MissionListRequest missionListRequest = MissionListRequest(userInfo!['userId']);
+    // MissionApi.getMissionList();
   }
 
   @override

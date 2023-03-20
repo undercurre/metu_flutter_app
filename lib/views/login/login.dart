@@ -1,5 +1,7 @@
 
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:metu_app/api/user.dart';
@@ -135,8 +137,10 @@ class LoginPageState extends State<LoginPage> {
 
                                     if (responce != null) {
                                       // 缓存用户信息
-                                      LocalStorage.setItem('userInfo', responce.data.info);
+                                      LocalStorage.setItem('userInfo', jsonEncode(responce.data.info));
                                       LocalStorage.setItem('token', responce.data.token);
+                                      var keys = LocalStorage.getKeys();
+                                      Console.log(responce.data.info);
                                       goToHome();
                                     }
                                   }
