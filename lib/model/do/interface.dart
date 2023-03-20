@@ -3,5 +3,5 @@ abstract class Interface<T> {
   String msg;
   T data;
 
-  Interface({required this.code, required this.msg,required this.data});
+  Interface(this.code, this.msg, this.data);
 }

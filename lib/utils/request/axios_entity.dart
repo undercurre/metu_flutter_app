@@ -55,19 +55,18 @@ class AxiosEntity {
     }
   }
 
-  static Future<K?> get<K>(
+  static Future get(
     String path, {
     Map<String, dynamic>? params,
     Options? options,
   }) async {
     Options requestOptions = options ?? Options();
-    Response<K> response;
-    response = await dio.get<K>(
+    Response response;
+    response = await dio.get(
       path,
       queryParameters: params,
       options: requestOptions,
     );
-    debugPrint('请求完成');
     return response.data;
   }
 

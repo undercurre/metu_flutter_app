@@ -1,16 +1,17 @@
 import 'package:metu_app/model/do/interface.dart';
 
 class LoginResponse implements Interface<LoginResponseData> {
-  @override
-  late final LoginResponseData data;
+
+  LoginResponse({required this.code, required this.msg, required this.data});
 
   @override
-  late final int code;
+  LoginResponseData data;
 
   @override
-  late final String msg;
+  int code;
 
-  LoginResponse({required LoginResponseData data, required code, required msg});
+  @override
+  String msg;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
     data: LoginResponseData.fromJson(json["data"]),

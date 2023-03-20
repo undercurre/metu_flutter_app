@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:metu_app/api/user.dart';
 import 'package:metu_app/model/do/login_req.dart';
+import 'package:metu_app/model/do/login_res.dart';
 import 'package:metu_app/utils/logger/index.dart';
 import 'package:metu_app/views/login/register.dart';
 
@@ -128,8 +129,7 @@ class LoginPageState extends State<LoginPage> {
                                   if (_formKey.currentState!.validate()) {
                                     LoginRequest loginRequestData = LoginRequest(_usernameController.text, _passwordController.text);
                                     // Process data.
-                                    var responce = await UserApi.login(loginRequestData);
-                                    Console.log('完成请求');
+                                    LoginResponse? responce = await UserApi.login(loginRequestData);
                                   }
                                 },
                                 child: const Text('登录'),

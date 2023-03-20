@@ -6,8 +6,8 @@ import '../model/do/login_res.dart';
 
 class UserApi {
   static Future<LoginResponse?> login(LoginRequest loginRequestData) async {
-    LoginResponse? res = await AxiosEntity.get<LoginResponse>('login', params: loginRequestData.toMap());
-    Console.log('请求完成');
-    return res;
+    var res = await AxiosEntity.get('login', params: loginRequestData.toMap());
+    LoginResponse resStrict = LoginResponse.fromJson(res);
+    return resStrict;
   }
 }
