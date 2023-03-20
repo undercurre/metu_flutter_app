@@ -6,9 +6,9 @@ class MissionUpdateRequest {
 
   String deadline;
 
-  String detail;
+  String? detail;
 
-  int status;
+  int? status;
 
   MissionUpdateRequest(this.id, this.missionname, this.deadline, this.detail, this.status);
 

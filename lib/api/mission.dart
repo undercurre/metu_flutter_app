@@ -1,7 +1,20 @@
+import 'package:metu_app/model/do/mission_list_req.dart';
+import 'package:metu_app/model/do/mission_list_res.dart';
+import 'package:metu_app/model/do/mission_update_req.dart';
+
+import '../model/do/mission_update_res.dart';
+import '../utils/request/axios_entity.dart';
+
 class MissionApi {
-  static Future<LoginResponse?> login(LoginRequest loginRequestData) async {
-    var res = await AxiosEntity.get('login', params: loginRequestData.toMap());
-    LoginResponse resStrict = LoginResponse.fromJson(res);
+  static Future<MissionListResponse?> getMissionList(MissionListRequest missionListRequest) async {
+    var res = await AxiosEntity.get('mission/queryByUser', params: missionListRequest.toMap());
+    MissionListResponse resStrict = MissionListResponse.fromJson(res);
+    return resStrict;
+  }
+
+  static Future<MissionUpdateResponse?> updateMissionStatus(MissionUpdateRequest missionUpdateRequest) async {
+    var res = await AxiosEntity.post('mission/update', data: missionUpdateRequest.toMap());
+    MissionUpdateResponse resStrict = MissionUpdateResponse.fromJson(res);
     return resStrict;
   }
 }

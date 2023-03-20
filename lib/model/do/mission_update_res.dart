@@ -28,52 +28,24 @@ class MissionUpdateResponse implements Interface<MissionUpdateResponseData> {
 
 class MissionUpdateResponseData {
   MissionUpdateResponseData({
-    required this.info,
-    required this.token,
+    required this.id,
+    required this.missionname,
+    required this.deadline
   });
 
-  LoginResponseInfo info;
-  String token;
+  int id;
+  String missionname;
+  String deadline;
 
   factory MissionUpdateResponseData.fromJson(Map<String, dynamic> json) => MissionUpdateResponseData(
-    info: LoginResponseInfo.fromJson(json["info"]),
-    token: json["token"],
+    id: json["id"],
+    missionname: json["missionname"],
+    deadline: json["deadline"]
   );
 
   Map<String, dynamic> toJson() => {
-    "info": info.toJson(),
-    "token": token,
-  };
-}
-
-class LoginResponseInfo {
-  LoginResponseInfo({
-    required this.email,
-    required this.phone,
-    required this.roleIds,
-    required this.userId,
-    required this.username,
-  });
-
-  String email;
-  String phone;
-  String roleIds;
-  int userId;
-  String username;
-
-  factory LoginResponseInfo.fromJson(Map<String, dynamic> json) => LoginResponseInfo(
-    email: json["email"],
-    phone: json["phone"],
-    roleIds: json["roleIds"],
-    userId: json["userId"],
-    username: json["username"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "email": email,
-    "phone": phone,
-    "roleIds": roleIds,
-    "userId": userId,
-    "username": username,
+    "id": id,
+    "missionname": missionname,
+    "deadline": deadline
   };
 }

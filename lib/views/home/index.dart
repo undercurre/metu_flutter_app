@@ -19,7 +19,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    Widget divider1=const Divider(color: Colors.blue,);
+    Widget divider1=const Divider(color: Colors.blue);
     Widget divider2=const Divider(color: Colors.green);
 
     return Scaffold(

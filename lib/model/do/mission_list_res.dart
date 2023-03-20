@@ -1,5 +1,7 @@
 import 'package:metu_app/model/do/interface.dart';
 
+import '../entity/mission.dart';
+
 class MissionListResponse implements Interface<MissionListResponseData> {
 
   MissionListResponse({required this.code, required this.msg, required this.data});
@@ -28,52 +30,16 @@ class MissionListResponse implements Interface<MissionListResponseData> {
 
 class MissionListResponseData {
   MissionListResponseData({
-    required this.info,
-    required this.token,
+    required this.list,
   });
 
-  LoginResponseInfo info;
-  String token;
+  List<Mission> list;
 
   factory MissionListResponseData.fromJson(Map<String, dynamic> json) => MissionListResponseData(
-    info: LoginResponseInfo.fromJson(json["info"]),
-    token: json["token"],
+    list: json["list"].map<Mission>((json) => Mission.fromJson(json)).toList(),
   );
 
   Map<String, dynamic> toJson() => {
-    "info": info.toJson(),
-    "token": token,
-  };
-}
-
-class LoginResponseInfo {
-  LoginResponseInfo({
-    required this.email,
-    required this.phone,
-    required this.roleIds,
-    required this.userId,
-    required this.username,
-  });
-
-  String email;
-  String phone;
-  String roleIds;
-  int userId;
-  String username;
-
-  factory LoginResponseInfo.fromJson(Map<String, dynamic> json) => LoginResponseInfo(
-    email: json["email"],
-    phone: json["phone"],
-    roleIds: json["roleIds"],
-    userId: json["userId"],
-    username: json["username"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "email": email,
-    "phone": phone,
-    "roleIds": roleIds,
-    "userId": userId,
-    "username": username,
+    "list": list
   };
 }
