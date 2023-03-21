@@ -27,39 +27,21 @@ class LocalStorage {
         _sp.setString(key, value as String);
         break;
       case int:
-        _sp.setInt(key, value as int);
+        _sp.setString(key, value.toString());
         break;
       case bool:
-        _sp.setBool(key, value as bool);
+        _sp.setString(key, value.toString());
         break;
       case double:
-        _sp.setDouble(key, value as double);
+        _sp.setString(key, value.toString());
         break;
-      case List<String>:
-        _sp.setStringList(key, value as List<String>);
-        break;
-    }
-
-    /// map不能直接判断Type类型，他是一个_InternalLinkedHashMap是一个私有类型，没有办法引用出来。
-    if (value is Map) {
-      // map，转成json格式的字符串进行保存。序列化成json字符串
-      _sp.setString(key, json.encode(value));
-      return;
     }
   }
 
   /// 根据key读取数据，
-  static Object? getItem<T>(String key) {
+  static String getItem<T>(String key) {
     var value = _sp.get(key);
-    if (value is String) {
-      try {
-        // 反序列化，处理map，原样返回map回去。
-        return const JsonDecoder().convert(value) as Map<String, dynamic>;
-      } on FormatException catch (e) {
-        return value; // 返回字符串
-      }
-    }
-    return value;
+    return value.toString();
   }
 
   /// -------------其他方法封装-----------------

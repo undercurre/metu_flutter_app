@@ -1,6 +1,7 @@
 import 'package:metu_app/model/do/interface.dart';
-
+import 'package:metu_app/utils/logger/index.dart';
 import '../entity/mission.dart';
+
 
 class MissionListResponse implements Interface<MissionListResponseData> {
 
@@ -31,15 +32,30 @@ class MissionListResponse implements Interface<MissionListResponseData> {
 class MissionListResponseData {
   MissionListResponseData({
     required this.list,
+    required this.page,
+    required this.size,
+    required this.total
   });
 
   List<Mission> list;
+  int page;
+  int size;
+  int total;
 
   factory MissionListResponseData.fromJson(Map<String, dynamic> json) => MissionListResponseData(
-    list: json["list"].map<Mission>((json) => Mission.fromJson(json)).toList(),
+    list: json["list"].map<Mission>((json) {
+      Console.log(json);
+      return Mission.fromJson(json);
+    }).toList(),
+    page: json["page"],
+    size: json["size"],
+    total: json["total"]
   );
 
   Map<String, dynamic> toJson() => {
-    "list": list
+    "list": list,
+    "page": page,
+    "size": size,
+    "total": total
   };
 }

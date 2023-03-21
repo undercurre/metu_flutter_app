@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:metu_app/utils/storage/index.dart';
 
 import '../axios_exception.dart';
 
@@ -18,7 +19,7 @@ class RequestInterceptor extends Interceptor {
     // 设置token
     // 从getx或者sputils中获取
     // String accessToken = Global.accessToken;
-    String accessToken = "";
+    String accessToken = LocalStorage.getItem('token') ?? '';
     if (header != null) {
       header['Authorization'] = 'Bearer $accessToken';
     } else {

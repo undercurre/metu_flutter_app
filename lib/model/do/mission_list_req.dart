@@ -1,9 +1,9 @@
 class MissionListRequest {
-  int id;
+  int userId;
 
-  MissionListRequest(this.id);
+  MissionListRequest(this.userId);
 
   Map<String, dynamic> toMap() => {
-    'id': id,
+    'userId': userId,
   };
 }
