@@ -14,7 +14,9 @@ class MissionApi {
   }
 
   static Future<MissionUpdateResponse?> updateMissionStatus(MissionUpdateRequest missionUpdateRequest) async {
+    Console.log(missionUpdateRequest.missionId);
     var res = await AxiosEntity.post('mission/update', data: missionUpdateRequest.toMap());
+    Console.log(res);
     MissionUpdateResponse resStrict = MissionUpdateResponse.fromJson(res);
     return resStrict;
   }

@@ -1,8 +1,8 @@
 class MissionUpdateRequest {
 
-  int id;
+  int missionId;
 
-  String missionname;
+  String missionName;
 
   String deadline;
 
@@ -10,11 +10,11 @@ class MissionUpdateRequest {
 
   int? status;
 
-  MissionUpdateRequest(this.id, this.missionname, this.deadline, this.detail, this.status);
+  MissionUpdateRequest(this.missionId, this.missionName, this.deadline, this.detail, this.status);
 
   Map<String, dynamic> toMap() => {
-    'id': id,
-    'missionname': missionname,
+    'missionId': missionId,
+    'missionName': missionName,
     'detail': detail,
     'deadline': deadline,
     'status': status
