@@ -19,7 +19,7 @@ class MissionListResponse implements Interface<MissionListResponseData> {
   factory MissionListResponse.fromJson(Map<String, dynamic> json) => MissionListResponse(
       data: MissionListResponseData.fromJson(json["data"]),
       code: json["code"],
-      msg: json["msg"]
+      msg: json["message"]
   );
 
   Map<String, dynamic> toJson() => {

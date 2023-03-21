@@ -8,9 +8,7 @@ import '../utils/request/axios_entity.dart';
 
 class MissionApi {
   static Future<MissionListResponse?> getMissionList(MissionListRequest missionListRequest) async {
-    Console.log(missionListRequest.userId);
     var res = await AxiosEntity.get('mission/queryByUser', params: missionListRequest.toMap());
-    Console.log(res);
     MissionListResponse resStrict = MissionListResponse.fromJson(res);
     return resStrict;
   }

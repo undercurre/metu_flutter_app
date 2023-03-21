@@ -32,7 +32,11 @@ class HomePageState extends State<HomePage> {
     User userInfo = User.fromJson(json.decode(LocalStorage.getItem('userInfo')));
     MissionListRequest missionListRequest = MissionListRequest(userInfo.userId);
     MissionListResponse? missionsRes = await MissionApi.getMissionList(missionListRequest);
-    Console.log(missionsRes);
+    if (missionsRes != null) {
+      setState(() {
+        missionList = missionsRes.data.list;
+      });
+    }
   }
 
   @override
@@ -46,10 +50,10 @@ class HomePageState extends State<HomePage> {
         title: Text(dotenv.get('appName')),
       ),
       body: ListView.separated(
-        itemCount: 100,
+        itemCount: missionList.length,
         //列表项构造器
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(title: Text("$index"));
+          return ListTile(title: Text(missionList[index].name));
         },
         //分割器构造器
         separatorBuilder: (BuildContext context, int index) {
