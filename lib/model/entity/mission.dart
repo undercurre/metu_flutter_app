@@ -24,7 +24,7 @@ class Mission {
         detail: json["detail"],
         status: json["status"],
         userId: json["userId"],
-        deadline: json["deadline"],
+        deadline: json["dealline"],
         createtime: json["createtime"],
         updatetime: json["updatetime"],
       );

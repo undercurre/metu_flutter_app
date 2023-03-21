@@ -44,7 +44,7 @@ class MissionListResponseData {
 
   factory MissionListResponseData.fromJson(Map<String, dynamic> json) => MissionListResponseData(
     list: json["list"].map<Mission>((json) {
-      Console.log(json);
+      Console.log(json["userId"]);
       return Mission.fromJson(json);
     }).toList(),
     page: json["page"],
