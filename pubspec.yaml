@@ -71,7 +71,7 @@ flutter:
 
   assets:
     - .dev.env
-    - .prop.env
+    - .prod.env
     - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
