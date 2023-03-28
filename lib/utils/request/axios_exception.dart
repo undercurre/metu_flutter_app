@@ -1,5 +1,6 @@
 /// 自定义异常类型
 import 'package:dio/dio.dart';
+import 'package:metu_app/utils/logger/index.dart';
 
 class AxiosException implements Exception {
   final String message;
@@ -16,6 +17,7 @@ class AxiosException implements Exception {
   }
 
   factory AxiosException.create(DioError error) {
+    Console.log(error);
     switch (error.type) {
       case DioErrorType.cancel:
         {
@@ -36,7 +38,7 @@ class AxiosException implements Exception {
       case DioErrorType.response:
         {
           try {
-            int? errCode = error.response?.statusCode;
+            int errCode = error.response?.statusCode ?? -1000;
             switch (errCode) {
               case 400:
                 {
@@ -80,6 +82,7 @@ class AxiosException implements Exception {
                 }
             }
           } on Exception catch (_) {
+            Console.log('报错');
             return AxiosException(-1, "未知错误");
           }
         }

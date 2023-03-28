@@ -132,8 +132,12 @@ class LoginPageState extends State<LoginPage> {
                                   // the form is invalid.
                                   if (_formKey.currentState!.validate()) {
                                     LoginRequest loginRequestData = LoginRequest(_usernameController.text, _passwordController.text);
+
+                                    Console.log(loginRequestData);
                                     // Process data.
                                     LoginResponse? responce = await UserApi.login(loginRequestData);
+
+                                    Console.log(responce);
 
                                     if (responce != null) {
                                       // 缓存用户信息

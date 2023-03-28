@@ -17,3 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 
 /// release打包
 flutter build apk --dart-define=env=prod --release
+adb install -r build\app\outputs\flutter-apk\app-release.apk

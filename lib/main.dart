@@ -14,12 +14,13 @@ void main() async {
   const env = String.fromEnvironment('env');
   Console.log(env);
   if (env != 'dev' && env != 'prod') {
-    // 如果不传dev或者prod默认使用sit环境
+    // 如果不传dev或者prod默认使用dev环境
     await dotenv.load(fileName: ".dev.env");
   } else {
     await dotenv.load(fileName: ".$env.env");
   }
 
+  Console.log(dotenv.get('baseUrl'));
   AxiosEntity().init(baseUrl: dotenv.get('baseUrl'));
 
   WidgetsFlutterBinding.ensureInitialized();
